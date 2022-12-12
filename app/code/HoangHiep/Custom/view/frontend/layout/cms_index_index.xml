@@ -1,0 +1,12 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	 <head>
+        <!-- <script src="HoangHiep_Custom::js/slick.js" async="async" /> -->
+        <css src="HoangHiep_Custom::css/css.css"/>
+    </head>
+    <body>
+    	<referenceBlock name="content">
+			<block class="HoangHiep\Custom\Block\ProductList" name="product_list" template="HoangHiep_Custom::product_list.phtml" after="-"/>
+            <block class="HoangHiep\Custom\Block\GetCMSBlock" name="home_about" template="HoangHiep_Custom::home_about.phtml" after="product_list"/>
+		</referenceBlock>
+    </body>
+</page>

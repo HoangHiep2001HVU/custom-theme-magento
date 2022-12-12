@@ -1,0 +1,104 @@
+.home-about-us{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 100px 0px;
+    position: relative;
+}
+
+.home-about {
+    max-width: 1080px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.img-home-about{
+    width: 40%;
+    z-index: 2;
+}
+
+.content-about-home {
+    width: 50%;
+    text-align: center;
+}
+
+.top-about-home {
+    margin-bottom: 36px;
+}
+
+.top-about-home h6 {
+    font-family: 'DM Sans',serif;
+    font-size: 24px;
+    line-height: 1.66666667;
+    letter-spacing: -.72px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.top-about-home h2{
+    color: #f41b15;
+    margin: 0;
+    margin-top: 6px;
+    font-family: 'DM Sans',serif;
+    font-size: 60px;
+    font-weight: 700;
+    line-height: 1;
+    text-transform: capitalize;
+    letter-spacing: -1.8px;
+}
+
+.txt-about-home {
+    margin-bottom: 50px;
+}
+
+.txt-about-home p {
+    color: #777;
+    font-family: 'DM Sans',sans-serif;
+    font-size: 16px;
+    line-height: 1.875;
+    font-weight: 400;
+}
+
+.learn-more-about-home a{
+    width: 180px;
+    background-color: #0660a9;
+    justify-content: center;
+    height: 60px;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 30px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: all .2s;
+    text-decoration: none;
+    cursor: pointer;
+    outline: 0;
+    color: #fff;
+    font-family: 'DM Sans',sans-serif;
+    box-shadow: none;
+    padding: 5px 40px;
+    display: inline-flex;
+    align-items: center;
+    text-transform: uppercase;
+}
+
+.learn-more-about-home a:hover {
+    color: #0660a9;
+    border-color: #0660a9;
+    background: #fff;
+}
+
+.home-about-us::before{
+    content: "";
+    border-style: solid;
+    border-width: 370px 0px 370px 370px;
+    border-color: transparent transparent transparent red;
+    position: absolute;
+    top: -105px;
+    left: 0;
+    z-index: 1;
+}

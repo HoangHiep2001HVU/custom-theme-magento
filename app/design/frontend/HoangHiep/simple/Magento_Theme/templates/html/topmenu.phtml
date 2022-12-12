@@ -1,0 +1,55 @@
+<?php
+/**
+ * Top menu for store
+ *
+ * @var $block \Magento\Theme\Block\Html\Topmenu
+ */
+
+$columnsLimit = $block->getColumnsLimit() ?: 0;
+
+$_menuHtml = $block->getHtml('level-top', 'submenu', $columnsLimit);
+
+?>
+
+<nav class="navigation" data-action="navigation">
+    <ul data-mage-init='{"menu":{"responsive":true, "expanded":true, "position":{"my":"left top","at":"left bottom"}}}'>
+        <li class="level0 nav-1 category-item first last level-top ui-menu-item">
+            <a href="<?= $block->escapeUrl($block->getUrl('')) ?>" class="level-top ui-menu-item-wrapper">
+                <span><?php echo __('HOME') ?></span>
+            </a>
+        </li>
+        <li class="level0 nav-1 category-item first last level-top ui-menu-item">
+            <a href="<?= $block->escapeUrl($block->getUrl('about-us')) ?>" class="level-top ui-menu-item-wrapper">
+                <span><?php echo __('ABOUT US') ?></span>
+            </a>
+        </li>
+        <?= /* @noEscape */ $_menuHtml?>
+        <li class="level0 nav-1 category-item first last level-top ui-menu-item">
+            <a href="<?= $block->escapeUrl($block->getUrl('our-brands')) ?>" class="level-top ui-menu-item-wrapper">
+                <span><?php echo __('Our Brands') ?></span>
+            </a>
+        </li>
+        <li class="level0 nav-1 category-item first last level-top ui-menu-item">
+            <a href="<?= $block->escapeUrl($block->getUrl('contact-us')) ?>" class="level-top ui-menu-item-wrapper">
+                <span><?php echo __('Contact us') ?></span>
+            </a>
+        </li>
+        <?= $block->getChildHtml() ?>
+    </ul>
+</nav>
+
+<script type="text/javascript">
+    require(['jquery', 'jquery/ui'], function($){
+        $(document).ready( function() {
+            $(".level0.category-item").append("<div class='level-top-is-active'><div class='triangle'></div></div>");
+
+            var path = window.location.href+"/"; 
+            $(".ui-menu-item a").each(function() {
+                if (this.href === path) {
+                    $(this).parent().addClass('active');
+                }
+            });
+        });
+
+    });
+</script>

@@ -1,0 +1,25 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <!-- <script src="HoangHiep_Custom::js/slick.js" async="async" /> -->
+        <css src="HoangHiep_Custom::css/featured.css"/>
+        <css src="HoangHiep_Custom::css/home_about.css"/>
+        <css src="HoangHiep_Custom::js/script.js"/>
+        <!-- <css src="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css"  src_type="url" rel="stylesheet" type="text/css"  /> -->
+    </head>
+	<body>
+    	<!-- <referenceBlock name="content">
+			<block class="HoangHiep\Custom\Block\ProductList" name="product_list" template="HoangHiep_Custom::product_list.phtml" after="-"/>
+            <block class="HoangHiep\Custom\Block\GetCMSBlock" name="home_about" template="HoangHiep_Custom::home_about.phtml" after="product_list"/>
+		</referenceBlock> -->
+
+        <referenceContainer name="footer-container">
+            <container name="footer.content" label="Footer Content" htmlTag="div" htmlClass="footerContent" after="-" >
+                <block class="HoangHiep\Custom\Block\GetCMSBlock" name="footer-custom" template="HoangHiep_Custom::footer_custom.phtml"/>
+            </container>
+        </referenceContainer>
+        <referenceBlock name="footer_links" remove="true" />
+        <referenceBlock name="copyright" remove="true" />
+        <referenceBlock name="form.subscribe" remove="true" />
+        <referenceBlock name="report.bugs" remove="true" />
+    </body>
+</page>

@@ -1,0 +1,11 @@
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="header.panel" remove="true"/>
+        <move element="navigation.sections" destination="header-wrapper" before="minicart"/>
+
+        <referenceBlock name="header-wrapper">
+            <block class="Magento\Customer\Block\Account\AuthorizationLink" name="customer_links" as="customer_links" 
+            template="Magento_Theme::header/customer_links.phtml" after="navigation.sections"/>
+       </referenceBlock>
+    </body>
+</page>

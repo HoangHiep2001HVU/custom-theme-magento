@@ -1,0 +1,58 @@
+.header.content .lof-autosearch {
+    margin-left: 10px;
+    margin-right: 10px;
+    form {
+        max-width: 350px;
+        display: flex;
+        flex-direction: row-reverse;
+        .category-filter{
+            span{
+                height: 32px;
+                line-height: 36px;
+                padding: 0 10px;
+                pointer-events: none;
+                position: absolute;
+                right: 15px;
+                top: 2px;
+                width: 30px;
+            }
+            .fa-caret-down{
+                color: @color-menu-nav;
+                background: none;
+            }
+            select {
+                max-width: 155px;
+                border: 1px solid #DDDDDD;
+                color: @color-menu-nav;
+                background: @color-white;
+                border-radius: 0px 6px 6px 0px;
+            }
+        }
+        .lof-search{
+            .input-text.ui-autocomplete-input{
+                height: 36px;
+                border: 1px solid #DDDDDD;
+                border-radius: 6px 0px 0px 6px;
+            }
+        }
+    }
+    .button-search{
+        color: @color-white;
+        background-color: @color-balck;
+        border: none;
+        font-size: 16px;
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        box-shadow: none;
+        padding: 7px 10px;
+        border-radius: 6px;
+    }
+}
+
+._keyfocus *:focus,
+input:not([disabled]):focus,
+textarea:not([disabled]):focus,
+select:not([disabled]):focus {
+  box-shadow: none;
+}

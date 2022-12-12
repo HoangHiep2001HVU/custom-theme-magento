@@ -1,0 +1,128 @@
+<?php
+// $productCollection = $block->getProductCollection();
+// foreach ($productCollection as $product) {
+//     print_r($product->getData());     
+//     echo "<br>";
+// }
+// die();
+use Magento\Framework\App\Action\Action;
+$_productCollection = $block->getProductCollection();
+if ($_productCollection->getSize() <= 0) {
+    return;   
+}
+
+$objectManager =\Magento\Framework\App\ObjectManager::getInstance();
+$helperImport = $objectManager->get('\Magento\Catalog\Helper\Image');
+$showWishlist = true;
+$showCompare = true;
+$showCart = true;
+$templateType = \Magento\Catalog\Block\Product\ReviewRendererInterface::DEFAULT_VIEW;
+$description = false;
+
+const PARAM_NAME_BASE64_URL = 'r64';
+const PARAM_NAME_URL_ENCODED = 'uenc';
+?>
+<div class="featured-products">
+    <div class="content-inner">
+        <div class="product-wrapper">
+            <div class="block-title"><h2>Featured Products</h2></div>
+            <div class="block-content">
+                <div id="product-items" class="slide_featured slick-slider">
+                    <?php
+                        foreach ($_productCollection as $product){
+                    ?>
+                        <?php if($product->getdata('is_featured_products')) : ?>
+                            <div class="item">
+                                <div class="product-item-info">
+                                    <div class="new-and-sale">
+                                        <?php if($product->getdata('is_new')): ?>
+                                            <div class="is-new">
+                                                <span>New</span>
+                                            </div>
+                                        <?php endif; ?>
+                                        <?php if($product->getdata('is_sale')): ?>
+                                            <div class="is-sale">
+                                                <span>Sale</span>
+                                            </div>
+                                        <?php endif; ?>
+                                    </div>
+                                    <a href="<?php echo $product->getProductUrl(); ?>"
+                                    class="product-item-photo">
+                                        <img src="<?php 
+                                            $imageUrl = $helperImport->init($product, 'product_page_image_small')
+                                                            ->setImageFile($product->getImage()) // image,small_image,thumbnail
+                                                            ->resize(380)
+                                                            ->getUrl();
+                                            echo $imageUrl;
+                                        
+                                        ?>" alt="">
+                                    </a>
+                                    <div class="product-item-details">
+                                        <div class="product-label">
+                                            <?php $categories = $block->getCategoryOfProduct($product->getId()); ?>
+                                            <?php
+                                                foreach ($categories as $category) {
+                                                    echo '<span>'.$category->getName() . '</span>';
+                                                }
+                                            ?>
+                                        </div>
+                                        <div class="product-item-name">
+                                            <a href="<?php echo $product->getProductUrl(); ?>" class="pr_name">
+                                                <strong><?php echo  $product->getName(); ?></strong>
+                                            </a>
+                                        </div>
+                                        <div class="price">
+                                            <span class="text-price"><?php echo $block->getProductPriceHtml($product); ?></span>
+                                        </div>
+                                    </div>
+
+                                    <div class="product-item-actions">
+                                        <?php $postParams = $block->getAddToCartPostParams($product); ?>
+                                        <form data-role="tocart-form" action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>" method="post">
+                                            <input type="hidden" name="product" value="<?php /* @escapeNotVerified */ echo $postParams['data']['product']; ?>">
+                                            <input type="hidden" name="<?php /* @escapeNotVerified */ echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php /* @escapeNotVerified */ echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                                            <?php echo $block->getBlockHtml('formkey')?>
+                                            <?php $storeManager = \Magento\Framework\App\ObjectManager::getInstance()->get('Magento\Store\Model\StoreManagerInterface'); ?>
+                                                <button type="submit" title="<?php echo $block->escapeHtml(__('Add to Cart')); ?>" class="action tocart primary">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24.307" height="24" viewBox="0 0 24.307 24">
+                                                        <g id="Group_10" data-name="Group 10" transform="translate(-128.311 -654.331)">
+                                                            <path id="Path_10" data-name="Path 10" d="M138.01,672.01a3.16,3.16,0,1,0,3.161,3.161A3.164,3.164,0,0,0,138.01,672.01Zm0,4.589a1.428,1.428,0,1,1,1.429-1.428A1.429,1.429,0,0,1,138.01,676.6Z" fill="#333"/>
+                                                            <path id="Path_11" data-name="Path 11" d="M149.458,672.01a3.16,3.16,0,1,0,3.16,3.161A3.164,3.164,0,0,0,149.458,672.01Zm0,4.589a1.428,1.428,0,1,1,1.428-1.428A1.43,1.43,0,0,1,149.458,676.6Z" fill="#333"/>
+                                                            <path id="Path_12" data-name="Path 12" d="M151.854,660.124l-16.833-2V656.73a.867.867,0,0,0-.611-.828l-4.978-1.533a.866.866,0,0,0-.51,1.655l4.367,1.345v10.006a3.08,3.08,0,0,0,2.99,3.077h12.638a3.877,3.877,0,0,0,3.7-4v-5.466A.866.866,0,0,0,151.854,660.124Zm-.968,6.325a2.148,2.148,0,0,1-1.969,2.271H136.279a1.382,1.382,0,0,1-1.258-1.345v-7.507l15.865,1.884Z" fill="#333"/>
+                                                        </g>
+                                                    </svg>
+                                                    <span><?php /* @escapeNotVerified */ echo __('Add to Cart') ?></span>
+                                                </button>
+                                                <div class="add-wish-list">
+                                                    <?php 
+                                                        echo $block->getLayout()->createBlock('HoangHiep\Custom\Block\Wishlist')
+                                                            ->setProduct($product)->setTemplate("HoangHiep_Custom::wishlist.phtml")->toHtml(); 
+                                                    ?>
+                                                </div>
+                                        </form>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    <?php } ?>
+                </div>
+                <div class="link-product"><a href="#">View all product</a></div>
+            </div>
+            <script>
+                require(['jquery', 'jquery/ui', 'slick'], function($){
+                    $(document).ready(function() {
+                        $('.slick-slider').slick({
+                            dots: false,
+                            infinite: false,
+                            slidesToShow: 4,
+                            slidesToScroll: 2,
+                            autoplay: true
+                        });
+                    });
+                });
+            </script>
+        </div>
+    </div>
+</div>
+
